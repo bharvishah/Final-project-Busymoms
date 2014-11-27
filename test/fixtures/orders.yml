@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  store: MyString
+  items: MyText
+  allow_sub: false
+  delivery_window: MyString
+  add_note: MyText
+  user_id: 1
+
+two:
+  store: MyString
+  items: MyText
+  allow_sub: false
+  delivery_window: MyString
+  add_note: MyText
+  user_id: 1

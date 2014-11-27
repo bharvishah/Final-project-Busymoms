@@ -1,0 +1,66 @@
+<center>
+<h1>Complete the form and Submit</h1>
+</center>
+<%= simple_form_for @order do |f| %>
+
+<%= link_to "Select a store", "#", class: "btn btn-primary", data: {toggle: "modal", target: "#mapModal"} %>
+<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+         <div id="map"></div>
+        <script>
+        $(window).ready(function(){
+          window.map = L.map('map').setView([29.7601927, -95.36938959999999], 12);
+
+          L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+            maxZoom: 13,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            id: 'examples.map-i875mjb7'
+          }).addTo(window.map);
+
+          L.marker([29.7601927, -95.36938959999999])
+          .addTo(window.map)
+          .bindPopup("<b>You are HERE</b>");
+
+
+        });
+        </script>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+    <%= f.input :store, label: "Store Address",:input_html => {:style => "width:400px"} %>
+  <%= f.simple_fields_for :items, input_html: {class: 'span2'}, wrapper_html: {class: 'controls controls-row'} do |m| %>
+        <%= m.input :description, :input_html => {class: 'span1', :style => "width:400px"}, placeholder: "eg. Roma Tomatoes" %>
+        <%= m.input :quantity, :input_html => {class: 'span1', :style => "width:300px"}, placeholder: "eg: 1 lb or 1 2-lb bag", prompt: "enter a quantity" %>
+      <% end %>
+
+  <%= f.input :allow_sub, label: "Allow substitution", as: :boolean, checked_value: true, unchecked_value: false %>
+
+  <%= f.input :delivery_date, placeholder: "#{Date.today}", as: :string, :input_html => {'data-behaviour'=> 'datepicker'},:input_html => {:style => "width:200px"} %>
+
+  <%= f.input :delivery_window, label: "Delivery Time Window", :input_html => {:style => "width:200px"},:collection => ["11:00 am-12:00 pm","12:00 pm-1:00 pm","1:00 pm-2:00 pm","2:00 pm-3:00 pm","3:00 pm-4:00 pm","4:00 pm-5:00 pm","5:00 pm-6:00 pm","6:00 pm-7:00 pm","7:00 pm-8:00 pm"], placeholder: "11:00 am - 12:00 pm" %>
+  <%= f.input :address,:input_html => {:style => "width:400px"}%>
+  <%= f.input :phone, :input_html => {:maxlength => 12, :size => 40, :style => "width: 120px" }, hint: "eg.832-265-6244" %>
+  <%= f.input :add_note, label: "Add special note for shopper",:input_html => {:style => "width:400px"},placeholder: "Any specific instructions about any itme/items" %>
+  <%= f.button :submit, "Submit your order", class: "btn btn-primary" do %>
+    <i class="icon-ok icon-white"></i> Submit your order
+  <% end %>
+  <%= button_tag "Cancel",class: "btn btn-primary" do %>
+    <i class="icon-ok icon-white"></i> Cancel
+
+  <% end %>
+
+<%end%>
