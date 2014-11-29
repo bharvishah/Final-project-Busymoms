@@ -1,26 +1,51 @@
 <center><h1>Welcome BUSY MoM !!</h1>
 <%= link_to "Place a new order", new_order_path ,class: "btn btn-default btn-lg" %>
-
+<input type="text" id="recipe_title" value="">
+<input type="button" onClick="getRecipeJson()" value="Search">
 </center>
 My Favorite recipe
 <script>
-$(window).ready(function(){
-function getRecipeJson() {
+function getRecipeJson()
+{
+        var recipe = document.getElementById("recipe_title").value
         var apiKey = "dvxIHNad7v9H4BT7z21w4o6HM36kv0ix";
-        var titleKeyword = "lasagna";
+        //var titleKeyword = "lasagna";
         var url = "http://api.bigoven.com/recipes?pg=1&rpp=25&title_kw="
-                  + titleKeyword
+                  + recipe
                   + "&api_key="+apiKey;
+
         $.ajax({
             type: "GET",
             dataType: 'json',
             cache: false,
             url: url,
             success: function (data) {
-                alert('success');
+                var templateHTML = $(".myTemplate").html();
                 console.log(data);
-            }
+                var compiler = _.template(templateHTML);
+                var result = compiler(data);
+              //  console.log(result);
+                $("body").append(result);
+
+              }
         });
-    }
-  });
+
+  }
+
+$(window).ready(getRecipeJson);
+
+</script>
+
+<script type="text/template" class="myTemplate">
+<div class="col-sm-6 col-md-4">
+<div class="thumbnail">
+
+
+{{ _.each(Results, function(result){ }}
+<img src= "{{= result.ImageURL }}">
+<span>{{= result.Title }}</span>
+{{ }); }}
+</div>
+
+
 </script>

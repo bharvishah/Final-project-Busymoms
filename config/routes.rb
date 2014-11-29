@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get 'order' => 'pages#new', as: :new_order
   post 'order' => 'pages#create', as: :orders
 
+  get 'recipe' => 'recipes#search', as: :recipe_search
+  post 'recipe' => 'recipes#result', as: :result
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
