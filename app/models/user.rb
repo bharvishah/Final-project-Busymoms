@@ -1,4 +1,15 @@
 class User < ActiveRecord::Base
-  has_many :orders
-  has_many :recipes
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  has_one :profile
+  accepts_nested_attributes_for :profile
+  before_create :build_user_profile
+
+  def build_user_profile
+    self.build_profile
+  end
+
+  devise :database_authenticatable,
+         :recoverable, :rememberable, :trackable, :validatable
+
 end

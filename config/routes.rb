@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+
+  devise_for :users
   root 'pages#index'
+  get 'users/new', as: :sign_up
+  post 'users' => 'users#create', as: :users
+
   get 'order' => 'pages#new', as: :new_order
   post 'order' => 'pages#create', as: :orders
 

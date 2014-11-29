@@ -28,6 +28,7 @@ gem 'spring',        group: :development
 
 gem 'bootstrap-sass'
 gem 'simple_form'
+gem 'devise'
 gem 'foursquare2'
 gem 'geocoder'
 gem 'bootstrap-datepicker-rails'

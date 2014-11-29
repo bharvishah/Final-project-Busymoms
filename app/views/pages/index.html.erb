@@ -3,7 +3,7 @@
 <input type="text" id="recipe_title" value="">
 <input type="button" onClick="getRecipeJson()" value="Search">
 </center>
-My Favorite recipe
+
 <script>
 function getRecipeJson()
 {
@@ -37,15 +37,15 @@ $(window).ready(getRecipeJson);
 </script>
 
 <script type="text/template" class="myTemplate">
+
+{{ _.each(Results, function(result){ }}
 <div class="col-sm-6 col-md-4">
 <div class="thumbnail">
 
-
-{{ _.each(Results, function(result){ }}
-<img src= "{{= result.ImageURL }}">
+<a href ="#"><img src= "{{= result.ImageURL }}"></a>
 <span>{{= result.Title }}</span>
-{{ }); }}
 </div>
-
+</div>
+{{ }); }}
 
 </script>
