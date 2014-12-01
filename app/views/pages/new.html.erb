@@ -54,7 +54,7 @@
 
   <%= f.input :delivery_window, label: "Delivery Time Window", :input_html => {:style => "width:200px"},:collection => ["11:00 am-12:00 pm","12:00 pm-1:00 pm","1:00 pm-2:00 pm","2:00 pm-3:00 pm","3:00 pm-4:00 pm","4:00 pm-5:00 pm","5:00 pm-6:00 pm","6:00 pm-7:00 pm","7:00 pm-8:00 pm"], placeholder: "11:00 am - 12:00 pm" %>
   <%= f.input :address,:input_html => {:style => "width:400px"}%>
-  <%= f.input :phone, :input_html => {:maxlength => 12, :size => 40, :style => "width: 120px" }, placeholder: user.profile.phone %>
+  <%= f.input :phone, :input_html => {:maxlength => 12, :size => 40, :style => "width: 120px" }, placeholder: "#{current_user.profile.phone}" %>
   <%= f.input :add_note, label: "Add special note for shopper",:input_html => {:style => "width:400px"},placeholder: "Any specific instructions about any itme/items" %>
   <%= f.button :submit, "Submit your order", class: "btn btn-primary" do %>
     <i class="icon-ok icon-white"></i> Submit your order

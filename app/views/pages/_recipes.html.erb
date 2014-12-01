@@ -1,0 +1,59 @@
+<% @recipes.each do |recipe| %>
+<div class="col-sm-6 col-md-4">
+  <div class="thumbnail">
+  <%= link_to "#", data: {toggle: "modal", target: "#recipe-modal#{recipe.id}"} do %>
+
+    <%= image_tag recipe.photo  %>
+    <%= recipe.name %>
+  <%end%>
+  <div class="modal fade" id="recipe-modal<%= recipe.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel"><%= recipe.name %></h4>
+        </div>
+        <div class="modal-body">
+          <div class = "row">
+            <div class = "col-xs-6">
+            <%= image_tag recipe.photo %>
+            </div>
+            <div class = "col-xs-6">
+              <b>Cooking Time :</b> <%= recipe.cooking_time %><br><br>
+              <b>Serving Size :</b><%= recipe.serving_size %><br><br>
+              <b>Category :</b> <%= recipe.category %><br><br>
+              <b>Cuisine : </b><%= recipe.cuisine %>
+            </div>
+        </div>
+        <div class = "row">
+          <div class="col-xs-6">
+              <b>Ingredients :</b><br>
+                    <% recipe.ingredients.each do |ingredient| %>
+                          <%= ingredient.qty %>&nbsp;<b><%= ingredient.name %></b>, &nbsp;<%= ingredient.style %><br><br>
+                    <%end%>
+            </div>
+            <div class="col-xs-6">
+              <b>Preperation :</b><br><i><%= recipe.method %></i>
+            </div>
+          </div>
+        </div>
+          <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <%= simple_form_for @order do |f| %>
+                  <%= f.simple_fields_for :items do |m| %>
+                    <% recipe.ingredients.each do |ingredient| %>
+                      <%= m.hidden_field :description, :value =>  "#{ingredient.name}" %>
+                      <%= m.hidden_field :quantity, :value => "#{ingredient.qty}" %>
+                    <%end%>
+                  <%end%>
+                <%= f.submit class: "btn btn-default" %>
+                <% end %>
+          </div>
+
+      </div>
+    </div>
+  </div>
+ </div>
+</div>
+
+<% end %>
