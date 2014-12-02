@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   get 'users/new', as: :sign_up
   post 'users' => 'users#create', as: :users
 
-  get 'order' => 'pages#new', as: :new_order
-  post 'order' => 'pages#create', as: :orders
+  get 'order/new' => 'pages#new', as: :new_order
+  post '/orders' => 'pages#create', as: :orders
 
   get 'recipe' => 'recipes#search', as: :recipe_search
   post 'recipe' => 'recipes#result', as: :result

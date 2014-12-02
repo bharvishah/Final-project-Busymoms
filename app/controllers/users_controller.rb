@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     @user.build_profile
   end
   def create
-    @user = User.new(user_profile_params)
+      @user = User.new(user_profile_params)
     if @user.save
       sign_in @user
       redirect_to root_path

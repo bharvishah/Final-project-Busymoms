@@ -7,11 +7,24 @@ class PagesController < ApplicationController
   end
   def new
     @order = Order.new
-    @order.items.build
+    @items = session[:shopping_list]
+    @items.each do |item|
+      @order.items.build
+      @order.items.last.quantity = item[0]
+      @order.items.last.description = item[1]
+    end
   end
-  def create
 
-    
+  def create
+    @recipe_id = params["recipe_id"]
+    @recipe = Recipe.find(params["recipe_id"])
+    @items = session[:shopping_list]
+    @recipe.ingredients.each do |ingredient|
+      @items << [ingredient.qty, ingredient.name]
+    end
+  end
+
+
 
     # if order_params[:tmpOrderId]?
     #   @order = Order.Find(order_params[:tmpOrderId])
@@ -25,7 +38,7 @@ class PagesController < ApplicationController
       # @order.save
       # redirect_to index_path(tmpOrderId=@order.id)
     # end
-  end
+
 
     # private
     #

@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   before_create :build_user_profile
 
   def build_user_profile
-    self.build_profile
+    self.build_profile unless self.profile
   end
 
   devise :database_authenticatable,

@@ -18,11 +18,11 @@
 //= require_tree .
 
 $(window).ready(function(){
-//  $('[data-behaviour~=datepicker]').datepicker();
 
   _.templateSettings = {
     interpolate: /\{\{\=(.+?)\}\}/g,
     evaluate: /\{\{(.+?)\}\}/g
   };
+
 
 });
