@@ -1,6 +1,22 @@
 <h1><%= @user.profile.first_name %></h1>
 <p>  Your order has been succesfully placed with us!</p>
+<p> Order Summary: </p>
+<p>Items: </p>
+<table>
 
+<p><%= @order.items.each do |item| %>
+    <tr>
+      <td>
+        <%= item.description %></td>
+        <td>
+          <%= item.quantity %></td>
+
+        </tr>
+  <% end %>
+  <p>Delivery Address : <%= @order.address_line1 %> , <%= @order.address_line2 %> , <%= @order.state %> , <%= @order.zip %> , USA</p>
+
+<p> Expected Delivery Date and Time : On <%= @order.delivery_date %> between <%= @order.delivery_window %>
 <p>
    You will soon be updated on your order id <%= @order.id %> .
 </p>
+<p> You can also login to your account to check the current status </p>
