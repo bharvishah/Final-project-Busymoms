@@ -8,14 +8,29 @@ class PagesController < ApplicationController
   def new
     @order = Order.new
     @items = session[:shopping_list]
-    @items.each do |item|
+    if @items.count > 0
+      @items.each do |item|
+        @order.items.build
+        @order.items.last.quantity = item[0]
+        @order.items.last.description = item[1]
+      end
+    else
       @order.items.build
-      @order.items.last.quantity = item[0]
-      @order.items.last.description = item[1]
     end
   end
 
   def create
+    @order = Order.new(params.require(:order)
+            .permit(:user_id, :store, :allow_sub, :delivery_window, :delivery_date, :add_note, :address_line1, :address_line2, :state, :zip, :phone))
+    @order.status = "Order placed"
+    if @order.save
+      OrderMailer.order_confirmation(current_user, @order).deliver
+      redirect_to root_path, message: "Your order has been successfully placed."
+    end
+
+  end
+
+  def list
     @recipe_id = params["recipe_id"]
     @recipe = Recipe.find(params["recipe_id"])
     @items = session[:shopping_list]

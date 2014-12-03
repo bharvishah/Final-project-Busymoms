@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'order/new' => 'pages#new', as: :new_order
   post '/orders' => 'pages#create', as: :orders
+  post '/list' => 'pages#list', as: :list
 
   get 'recipe' => 'recipes#search', as: :recipe_search
   post 'recipe' => 'recipes#result', as: :result
