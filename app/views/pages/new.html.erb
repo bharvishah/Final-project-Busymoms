@@ -5,14 +5,16 @@
 </center>
 <% if user_signed_in? %>
 <%= simple_form_for @order do |f| %>
-
-<%= link_to "Select a store", "#", class: "btn btn-primary", data: {toggle: "modal", target: "#mapModal"} %>
-<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+<div class = "row">
+  <div class = "col-xs-6">
+    <%= link_to "Select a store", "#", class: "btn btn-primary", data: {toggle: "modal", target: "#mapModal"} %>
+  </div>
+    <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
          <div id="map"></div>
@@ -46,11 +48,27 @@
     </div>
   </div>
 </div>
+
+  <div class = "col-xs-6">
     <%= f.input :store, label: "Store Address",:input_html => {:style => "width:400px"} %>
-  <%= f.simple_fields_for :items, input_html: {class: 'span2'}, wrapper_html: {class: 'controls controls-row'} do |m| %>
+  </div>
+</div>
+<table class = "table table-bordered">
+  <tr>
+      <%= f.simple_fields_for :items, input_html: {class: 'span2'}, wrapper_html: {class: 'controls controls-row'} do |m| %>
+      <td class = "col-xs-6">
+
         <%= m.input :description, :input_html => {class: 'span1', :style => "width:400px"}, placeholder: "eg. Roma Tomatoes" %>
+      </td>
+      <td class = "col-xs-6">
+
         <%= m.input :quantity, :input_html => {class: 'span1', :style => "width:300px"}, placeholder: "eg: 1 lb or 1 2-lb bag", prompt: "enter a quantity" %>
-      <% end %>
+      </td>
+    </tr>
+  <% end %>
+
+  </table>
+
 
   <%= f.input :allow_sub, label: "Allow substitution", as: :boolean, checked_value: true, unchecked_value: false %>
 
