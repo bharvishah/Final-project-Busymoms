@@ -1,0 +1,9 @@
+<% if @recipe.errors.any? %>
+  $("#recipe-form").html("<%= j render partial: 'recipes/recipeform' %>");
+
+<% else %>
+  $("#newRecipeModal").modal("hide");
+  $("#recipes").html("<%= j render partial: 'pages/recipes' %>");
+  $("#recipe-form").html("<%= j render partial: 'recipes/recipeform' %>");
+
+<% end %>

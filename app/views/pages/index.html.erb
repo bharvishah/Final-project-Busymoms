@@ -1,17 +1,71 @@
+<% if user_signed_in? %>
+<div class="navbar navbar-default">
 
-<div class="page-header">
-  <h1>Welcome Busy MoM !<small> We make mommys happy !</small></h1>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">My Account <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Edit my Profile</a></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </div>
 
-<center>
-<%= link_to "Place a new order", new_order_path ,class: "btn btn-default btn-lg" %>
-<input type="text" id="recipe_title" value="">
-<input type="button" onClick="getRecipeJson()" value="Search">
-</center>
+
+<div id ="main-heading">
+  <div class="row">
+    <div class="heading1">
+      <h1>BUSY MOMS </h1>
+    </div>
+  </div>
+  <div class ="row">
+      <div class="col-md-8">
+        <div class = "heading2">
+          Making mommys happy !!
+        </div>
+      </div>
+      <div class="col-md-4 search-recipe">
+          <%= form_tag root_path, method: 'get', :class => "search-recipe" do %>
+          <i class="fa fa-search search-recipe"></i>
+           <%= text_field_tag :search, params[:search], class: "form-control search-recipe", placeholder: "Search a recipe" %>
+          <% end %>
+        </div>
+      </div>
+</div>
+
+  <input type="text" id="recipe_title" value="">
+  <input type="button" onClick="getRecipeJson()" value="Search">
+
+<div class="btn-group btn-group-justified btn-group-lg">
+<%= link_to "Add New Recipe", "#", class: "btn btn-warning", data: {toggle: "modal", target: "#newRecipeModal"} %>
+
+<%= link_to "Place a new order", new_order_path ,class: "btn btn-success" %>
+  <a href="#" class="btn btn-danger">Check status</a>
+  <a href="#" class="btn btn-info">whatever</a>
+
+</div>
+
+<div class="modal fade" id="newRecipeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div id="recipe-form">
+      <%= render partial: 'recipes/recipeform' %>
+
+    </div>
+  </div>
+</div>
+</div>
+
 
 <div id="recipes">
-  <%= render partial: "pages/recipes" %>
-</div>
+        <%= render partial: "pages/recipes" %>
+  </div>
+
+
 
 
 
@@ -79,3 +133,4 @@ $(window).ready(getRecipeJson);
 {{ }); }}
 
 </script>
+<% end %>

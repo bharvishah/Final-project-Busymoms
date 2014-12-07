@@ -33,6 +33,12 @@ gem 'foursquare2'
 gem 'geocoder'
 gem 'bootstrap-datepicker-rails'
 gem 'rails_12factor'
+gem 'pg_search'
+gem 'carrierwave'
+gem 'fog'
+gem 'dotenv-rails'
+gem "mini_magick", "~> 4.0.0.rc"
+gem 'rails_12factor'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

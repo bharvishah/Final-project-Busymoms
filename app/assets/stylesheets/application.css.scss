@@ -9,11 +9,16 @@
 
 img
 {
-  height: 150px;
-  width: 200px;
+  height: 100%;
+  width: 100%;
 }
 
-.col-xs-12 col-md-8
+.search-recipe
 {
-  
+  display: inline;
+}
+
+#all-recipes
+{
+  padding-top: 70px;
 }

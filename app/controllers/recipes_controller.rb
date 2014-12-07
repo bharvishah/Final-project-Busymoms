@@ -1,7 +1,13 @@
 class RecipesController < ApplicationController
-  def search
+  def new
+    @recipes = Recipe.all
+    @recipe= Recipe.new
   end
-
-  def result
+  def create
+    @recipe = Recipe.new(params.require(:recipe).permit(:name,:photo,:cuisine,:category,:method, :cooking_time,:serving_size, ingredients_attributes: [:name, :qty, :style]))
+    if @recipe.save
+      @recipes = Recipe.all
+      @recipe = Recipe.new
+    end
   end
 end

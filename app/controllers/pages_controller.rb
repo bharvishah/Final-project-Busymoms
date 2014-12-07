@@ -3,6 +3,8 @@ class PagesController < ApplicationController
   def index
     @recipes = Recipe.all
     @order = Order.new
+    @recipes = @recipes.mysearch(params[:search]) if params[:search].present?
+
 
   end
   def new
@@ -15,17 +17,26 @@ class PagesController < ApplicationController
         @order.items.last.description = item[1]
       end
     else
-      @order.items.build
+      5.times do
+        @order.items.build
+      end
     end
   end
 
   def create
     @order = Order.new(params.require(:order)
-            .permit(:user_id, :store, :allow_sub, :delivery_window, :delivery_date, :add_note, :address_line1, :address_line2, :state, :zip, :phone))
-    @order.status = "Order placed"
-    if @order.save
-      OrderMailer.order_confirmation(current_user, @order).deliver
-      redirect_to root_path, message: "Your order has been successfully placed."
+            .permit(:user_id, :store, :allow_sub, :delivery_window, :delivery_date, :add_note, :address_line1, :address_line2, :state, :zip, :phone, items_attributes: [:description, :quantity, :_destroy]))
+    if params[:add_item]
+      @order.items.build
+      render :new
+    elsif params[:remove_item]
+      render :new
+    else
+      @order.status = "Order placed"
+      if @order.save
+        OrderMailer.order_confirmation(current_user, @order).deliver
+        redirect_to root_path, message: "Your order has been successfully placed."
+      end
     end
 
   end

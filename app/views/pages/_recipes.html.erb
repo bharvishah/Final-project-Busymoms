@@ -1,12 +1,14 @@
-<% @recipes.each do |recipe| %>
-<div class="col-sm-6 col-md-4">
-  <div class="thumbnail">
-  <%= link_to "#", data: {toggle: "modal", target: "#recipe-modal#{recipe.id}"} do %>
-
-    <%= image_tag recipe.photo  %>
-    <%= recipe.name %>
-  <%end%>
-  <div class="modal fade" id="recipe-modal<%= recipe.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id ="all-recipes">
+  <% @recipes.each do |recipe| %>
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <%= link_to "#", data: {toggle: "modal", target: "#recipe-modal#{recipe.id}"} do %>
+      <%= image_tag recipe.photo  %>
+      <%  end %>
+    </div>
+    <div align="center" class="text-danger" style="font-size: 20px;"><%= recipe.name %></div>
+  </div>
+<div class="modal fade" id="recipe-modal<%= recipe.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -24,9 +26,9 @@
               <b>Category :</b> <%= recipe.category %><br><br>
               <b>Cuisine : </b><%= recipe.cuisine %>
             </div>
-        </div>
-        <div class = "row">
-          <div class="col-xs-6">
+          </div>
+          <div class = "row">
+            <div class="col-xs-6">
               <b>Ingredients :</b><br>
                     <% recipe.ingredients.each do |ingredient| %>
                           <%= ingredient.qty %>&nbsp;<b><%= ingredient.name %></b>, &nbsp;<%= ingredient.style %><br><br>
@@ -37,19 +39,16 @@
             </div>
           </div>
         </div>
-          <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <%= form_tag orders_path, remote: true, method: :post do %>
-                <%= hidden_field_tag "recipe_id", recipe.id %>
-                <button class: "btn btn-default"> Add to List</button>
-                <% end %>
-                <span id="message<%= recipe.id %>" style="color:red"></span>
-          </div>
-
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= form_tag list_path, remote: true, method: :post do %>
+          <%= hidden_field_tag "recipe_id", recipe.id %>
+          <button class: "btn btn-default"> Add to List</button>
+          <% end %>
+          <span id="message<%= recipe.id %>" style="color:red"></span>
+        </div>
       </div>
     </div>
   </div>
- </div>
+  <% end %>
 </div>
-
-<% end %>
