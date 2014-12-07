@@ -1,0 +1,10 @@
+<% if params[:add_ingredient] || params[:remove_ingredient] %>
+  $("#recipe-form").html("<%= j render partial: 'pages/recipeform' %>");
+<% elsif @recipe.errors.any? %>
+  $("#recipe-form").html("<%= j render partial: 'pages/recipeform' %>");
+<% else %>
+  $("#newRecipeModal").modal("hide");
+  $("#recipes").html("<%= j render partial: 'pages/recipes' %>");
+   $("#recipe-form").html("<%= j render partial: 'pages/recipeform' %>");
+
+ <% end %>

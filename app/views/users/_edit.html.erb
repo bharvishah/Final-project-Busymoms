@@ -1,0 +1,24 @@
+
+<h2>edit profile</h2>
+<%= simple_form_for @user, :url => update_user_path(@user) do |f| %>
+
+<div class="form-inputs">
+  <%= f.simple_fields_for :profile do |profile_form| %>
+  <%= profile_form.input :first_name, required:true %>
+  <%= profile_form.input :last_name, required:true %>
+  <%= profile_form.input :address_line1, required:true %>
+  <%= profile_form.input :address_line2 %>
+  <%= profile_form.input :city, required:true %>
+  <%= profile_form.input :state, required:true %>
+  <%= profile_form.input :phone, required:true %>
+  <%= profile_form.input :photo %>
+  <% end %>
+  <%= f.input :email, required: true, autofocus: true %>
+  <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable) %>
+  <%= f.input :password_confirmation, required: true %>
+</div>
+
+<div class="form-actions">
+  <%= f.button :submit, "Update profile" %>
+</div>
+<% end %>

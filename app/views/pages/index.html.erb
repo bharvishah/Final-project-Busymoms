@@ -7,7 +7,7 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">My Account <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Edit my Profile</a></li>
+          <li><%= link_to "View Profile", root_path(:profile =>"1") %></li>
           <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
         </ul>
       </li>
@@ -44,8 +44,8 @@
 <%= link_to "Add New Recipe", "#", class: "btn btn-warning", data: {toggle: "modal", target: "#newRecipeModal"} %>
 
 <%= link_to "Place a new order", new_order_path ,class: "btn btn-success" %>
-  <a href="#" class="btn btn-danger">Check status</a>
-  <a href="#" class="btn btn-info">whatever</a>
+  <%= link_to "Check Status", root_path(:status => "1"), class: "btn btn-danger" %>
+  <%= link_to "All Recipes", root_path, class: "btn btn-info" %>
 
 </div>
 
@@ -53,21 +53,27 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div id="recipe-form">
-      <%= render partial: 'recipes/recipeform' %>
+      <%= render partial: 'pages/recipeform' %>
 
     </div>
   </div>
 </div>
 </div>
 
-
-<div id="recipes">
-        <%= render partial: "pages/recipes" %>
+<% if params[:status] %>
+  <div id="order_status">
+    <%= render partial: "pages/orderstatus" %>
+  </div>
+<% elsif params[:profile] %>
+    <div id="user_profile">
+    <%= render partial: "users/edit" %>
+    </div>
+<% else %>
+  <div id="recipes">
+    <%= render partial: "pages/recipes" %>
   </div>
 
-
-
-
+<% end %>
 
 <script>
 function getRecipeJson()
@@ -97,7 +103,7 @@ function getRecipeJson()
 
   }
 
-$(window).ready(getRecipeJson);
+//$(window).ready(getRecipeJson);
 
 </script>
 

@@ -4,13 +4,16 @@ Rails.application.routes.draw do
   root 'pages#index'
   get 'users/new', as: :sign_up
   post 'users' => 'users#create', as: :users
+  get '/profile' => 'users#edit', as: :edit_user
+  patch '/users/:id' => 'users#update', as: :update_user
 
   get 'order/new' => 'pages#new', as: :new_order
   post '/orders' => 'pages#create', as: :orders
   post '/list' => 'pages#list', as: :list
 
-  get 'recipe/new' => 'recipes#new', as: :recipe_new
-  post '/recipes' => 'recipes#create', as: :recipes
+  post '/recipes' => 'pages#create_recipe', as: :recipes
+
+  get '/status' => 'pages#status', as: :order_status
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

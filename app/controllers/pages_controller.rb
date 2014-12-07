@@ -1,12 +1,14 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!
+
   def index
+    @user = current_user
     @recipes = Recipe.all
-    @order = Order.new
+    @recipe = Recipe.new
+    @recipe.ingredients.build
     @recipes = @recipes.mysearch(params[:search]) if params[:search].present?
-
-
   end
+
   def new
     @order = Order.new
     @items = session[:shopping_list]
@@ -25,7 +27,7 @@ class PagesController < ApplicationController
 
   def create
     @order = Order.new(params.require(:order)
-            .permit(:user_id, :store, :allow_sub, :delivery_window, :delivery_date, :add_note, :address_line1, :address_line2, :state, :zip, :phone, items_attributes: [:description, :quantity, :_destroy]))
+            .permit(:store, :allow_sub, :delivery_window, :delivery_date, :add_note, :address_line1, :address_line2, :state, :zip, :phone, items_attributes: [:description, :quantity, :_destroy]))
     if params[:add_item]
       @order.items.build
       render :new
@@ -33,6 +35,7 @@ class PagesController < ApplicationController
       render :new
     else
       @order.status = "Order placed"
+      @order.user = current_user
       if @order.save
         OrderMailer.order_confirmation(current_user, @order).deliver
         redirect_to root_path, message: "Your order has been successfully placed."
@@ -50,27 +53,15 @@ class PagesController < ApplicationController
     end
   end
 
-
-
-    # if order_params[:tmpOrderId]?
-    #   @order = Order.Find(order_params[:tmpOrderId])
-    #   @order.items.append(order_params[:items])
-    #   @order.save
-    #   redirect_to index_path(tmpOrderId=@order.id)
-    # else
-      # @order = Order.new()
-      # @order.items = order_params[:items]
-      # @order.status = "Draft"
-      # @order.save
-      # redirect_to index_path(tmpOrderId=@order.id)
-    # end
-
-
-    # private
-    #
-    # def order_params
-    #   params.require(:order).permit(:tmpOrderId, :items['description','quantity'])
-    # end
-
+  def create_recipe
+    @recipe = Recipe.new(params.require(:recipe).permit(:name,:photo,:cuisine,:category,:method, :cooking_time,:serving_size, ingredients_attributes: [:name, :qty, :style, :_destroy]))
+    if params[:add_ingredient]
+      @recipe.ingredients.build
+    elsif params[:remove_ingredient]
+    else
+      @recipe.save
+      redirect_to root_path
+    end
+  end
 
 end

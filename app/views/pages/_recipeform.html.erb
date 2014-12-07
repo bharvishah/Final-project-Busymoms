@@ -1,0 +1,71 @@
+<% if user_signed_in? %>
+
+<%= simple_form_for @recipe, :remote => true do |f| %>
+
+<input type="hidden" name="authenticity_token" value="#{session[:_csrf_token]}">
+<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">New Recipe</h4>
+  </div>
+  <h4> Make a new recipe ! </h4>
+
+<div class = "modal-body">
+  <div class="row">
+    <div class = "col-xs-6">
+    <%= f.input :name %></div>
+    <div class = "col-xs-6">
+    <%= f.input :photo %></div>
+  </div>
+  <div class="row">
+    <div class = "col-xs-6">
+    <%= f.input :cuisine %></div>
+    <div class = "col-xs-6">
+    <%= f.input :category %></div>
+  </div>
+  <div class="row">
+    <div class = "col-xs-6">
+    <%= f.input :cooking_time %></div>
+    <div class = "col-xs-6">
+    <%= f.input :serving_size %></div>
+  </div>
+
+<div id="" style="overflow-y: scroll; height:300px;"><hr>
+
+<table class = "table table-bordered">
+      <%= f.simple_fields_for :ingredients, input_html: {class: 'span2'}, wrapper_html: {class: 'controls controls-row'} do |m| %>
+      <tr>  <td class = "col-xs-4">
+
+        <%= m.input :qty, :input_html => {class: 'span1', :style => "width:100px"}, placeholder: "eg: 1 cup", prompt: "enter a quantity" %>
+      </td>
+      <td class = "col-xs-4">
+
+        <%= m.input :style, :input_html => {class: 'span1', :style => "width:100px"}, placeholder: "sliced" %>
+      </td>
+      <td class = "col-xs-4">
+
+        <%= m.input :name, :input_html => {class: 'span1', :style => "width:200px"}, placeholder: "sliced" %>
+      </td>
+      <td><%= m.check_box :_destroy %>
+          <%= m.label :_destroy, 'delete' %>
+      </td>
+    </tr>
+  <% end %>
+  <%= f.submit 'Add ingredient', :name => "add_ingredient" %>
+  <%= f.submit 'Delete checked ingredients', :name => "remove_ingredient" %>
+
+</table><hr>
+</div>
+
+
+  <%= f.text_area :method, :style => "width:500px; height:300px;" %>
+
+</div>
+
+<div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit class: "btn btn-default" %>
+  </div>
+
+<% end %>
+
+<% end %>

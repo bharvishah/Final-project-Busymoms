@@ -6,6 +6,5 @@ class Order < ActiveRecord::Base
   validates :allow_sub, presence: true
   validates :delivery_window, presence: true
   validates :delivery_date, presence: true
-  validates :address, presence: true
   validates :phone, presence: true
 end
