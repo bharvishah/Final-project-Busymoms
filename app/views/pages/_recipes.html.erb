@@ -40,10 +40,10 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <%= form_tag list_path, remote: true, method: :post do %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>&nbsp;&nbsp;
+          <%= form_tag list_path, remote: true, method: :post, :style =>"display:inline;" do %>
           <%= hidden_field_tag "recipe_id", recipe.id %>
-          <button class: "btn btn-default"> Add to List</button>
+          <button type="button" class="btn btn-success"> Add to List</button>
           <% end %>
           <span id="message<%= recipe.id %>" style="color:red"></span>
         </div>

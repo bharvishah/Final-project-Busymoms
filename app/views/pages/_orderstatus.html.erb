@@ -1,3 +1,21 @@
+<p></p><p></p>
+<div class = "warning" style="border:2px;">
 <% @user.orders.each do |order| %>
-Your current order status is <%= order.status %>
+<table class="table table-striped table-hover" >
+  <thead>
+    <tr class="warning">
+      <th>Order No.</th>
+      <th>Current Status</th>
+      <th>Delivery Date</th>
+      <th>Expected Delivery Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="success">
+      <td><%= order.id%></td>
+      <td><%= order.status %></td>
+      <td><%= order.delivery_date.strftime("%b %d, %Y") %></td>
+      <td><%= order.delivery_window %></td>
+    </tr>
 <% end %>
+</div>

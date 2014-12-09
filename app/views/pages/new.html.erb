@@ -2,9 +2,9 @@
 
 <center>
 <h1>Complete the form and Submit</h1>
-<p>
-  <%= link_to root_path, class: "btn btn-primary" do %>
-    <i class="icon-ok icon-white"></i> Back
+<p align ="right">
+  <%= link_to root_path, class: "btn btn-success" do %>
+    <i class="icon-ok icon-white"></i> Home
 
   <% end %>
 
@@ -12,9 +12,11 @@
 </center>
 <% if user_signed_in? %>
 <%= simple_form_for @order do |f| %>
-<div class = "row">
+
+
+<!-- <div class = "row">
   <div class = "col-xs-6">
-    <%= link_to "Select a store", "#", class: "btn btn-primary", data: {toggle: "modal", target: "#mapModal"} %>
+    <%= link_to "Select a store", "#", class: "btn btn-default", data: {toggle: "modal", target: "#mapModal"} %>
   </div>
     <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -28,23 +30,6 @@
         <script>
         $(window).ready(function(){
           $("[data-behaviour~='datepicker']").datepicker();
-
-          var max_fields      = 10; //maximum input boxes allowed
-          var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-          var add_button      = $(".add_field_button"); //Add button ID
-
-          var x = 1; //initlal text box count
-          $(add_button).click(function(e){ //on add input button click
-              e.preventDefault();
-              if(x < max_fields){ //max input box allowed
-                  x++; //text box increment
-                  $(wrapper).append('<div><input type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
-              }
-          });
-
-          $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-              e.preventDefault(); $(this).parent('div').remove(); x--;
-          })
 
 
           window.map = L.map('map').setView([29.7601927, -95.36938959999999], 12);
@@ -72,13 +57,14 @@
 
     </div>
   </div>
-</div>
-
+</div> -->
+<div class="row">
   <div class = "col-xs-6">
-    <%= f.input :store, label: "Store Address",:input_html => {:style => "width:400px"} %>
+
+    <%= f.input :store, label: "Select the store",:collection =>["Walmart","Whole Foods Market","Costco","H-E-B","Kroger"], :include_blank => false,:input_html => {:style => "width:400px"} %>
   </div>
 </div>
-<div id="" style="overflow-y: scroll; height:300px;"><hr>
+<div id="" style="overflow-y: scroll; height:500px;"><hr>
 
 <table class = "table table-bordered">
       <%= f.simple_fields_for :items, input_html: {class: 'span2'}, wrapper_html: {class: 'controls controls-row'} do |m| %>
@@ -95,32 +81,60 @@
       </td>
     </tr>
   <% end %>
-  <%= f.submit 'Add ingredient', :name => "add_item" %>
-  <%= f.submit 'Delete checked ingredients', :name => "remove_item" %>
+  <%= f.submit 'Add item', class: "btn btn-success",:name => "add_item" %>
+  <%= f.submit 'Delete checked items', class: "btn btn-default",:name => "remove_item" %>
 
 </table><hr>
 </div>
 
 
-
+<p></p><p></p>
   <%= f.input :allow_sub, label: "Allow substitution", as: :boolean, checked_value: true, unchecked_value: false %>
+  <div class = "row">
+    <div class = "col-xs-6">
+      <%= f.input :delivery_date, placeholder: "#{Date.today}", as: :string, :input_html => { 'data-behaviour' => 'datepicker', :style => 'width:200px'} %></div>
+    <div class = "col-xs-6">
+      <%= f.input :delivery_window, label: "Delivery Time Window", :input_html => {:style => "width:200px"},:collection => ["11:00 am-12:00 pm","12:00 pm-1:00 pm","1:00 pm-2:00 pm","2:00 pm-3:00 pm","3:00 pm-4:00 pm","4:00 pm-5:00 pm","5:00 pm-6:00 pm","6:00 pm-7:00 pm","7:00 pm-8:00 pm"], placeholder: "11:00 am - 12:00 pm" %></div>
+    </div>
+    <div class="row">
+      <div class = "col-xs-6">
+        <%= f.input :address_line1,:input_html => {:style => "width:400px"}, placeholder: "#{current_user.profile.address_line1}"%></div>
+        <div class = "col-xs-6">
+          <%= f.input :address_line2,:input_html => {:style => "width:400px"}, placeholder: "#{current_user.profile.address_line2}"%></div>
 
-  <%= f.input :delivery_date, placeholder: "#{Date.today}", as: :string, :input_html => { 'data-behaviour' => 'datepicker', :style => 'width:200px'} %>
-  <%= f.input :delivery_window, label: "Delivery Time Window", :input_html => {:style => "width:200px"},:collection => ["11:00 am-12:00 pm","12:00 pm-1:00 pm","1:00 pm-2:00 pm","2:00 pm-3:00 pm","3:00 pm-4:00 pm","4:00 pm-5:00 pm","5:00 pm-6:00 pm","6:00 pm-7:00 pm","7:00 pm-8:00 pm"], placeholder: "11:00 am - 12:00 pm" %>
-  <%= f.input :address_line1,:input_html => {:style => "width:400px"}, placeholder: "#{current_user.profile.address_line1}"%>
-  <%= f.input :address_line2,:input_html => {:style => "width:400px"}, placeholder: "#{current_user.profile.address_line2}"%>
-  <%= f.input :state,:input_html => {:style => "width:100px"}, :collection => ["AL","AK","AR","AZ","CA","CO","CT","DE","DC","FL","GA","HI","IL","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"],placeholder: "#{current_user.profile.state}"%>
-  <%= f.input :zip,:input_html => {:style => "width:400px"}, placeholder: "#{current_user.profile.zip}"%>
+      </div>
+      <div class="row">
+          <div class = "col-xs-6">
+            <%= f.input :city,:input_html => {:style => "width:300px"}, placeholder: "#{current_user.profile.city}"%></div>
+            <div class = "col-xs-6">
+            <%= f.input :state,:input_html => {:style => "width:100px"},placeholder: "#{current_user.profile.state}", :collection => ["AL","AK","AR","AZ","CA","CO","CT","DE","DC","FL","GA","HI","IL","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"],:include_blank => false, placeholder: "#{current_user.profile.state}"%></div>
 
-  <%= f.input :phone, :input_html => {:maxlength => 12, :size => 40, :style => "width: 120px" }, placeholder: "#{current_user.profile.phone}" %>
-  <%= f.input :add_note, label: "Add special note for shopper",:input_html => {:style => "width:400px"},placeholder: "Any specific instructions about any itme/items" %>
-  <%= f.button :submit, "Submit your order", class: "btn btn-primary" do %>
+            </div>
+            <div class = "row">
+              <div class = "col-xs-6">
+                <%= f.input :zip,:input_html => {:style => "width:400px"}, placeholder: "#{current_user.profile.zip}"%></div>
+              <div class = "col-xs-6">
+                <%= f.input :country,:input_html => {:style => "width:400px"}, placeholder: "#{current_user.profile.country}", :collection =>["USA"],:include_blank => false %></div>
+            </div>
+
+      <div class="row">
+        <div class = "col-xs-6">
+          <%= f.input :phone, :input_html => {:maxlength => 12, :size => 40, :style => "width: 120px" }, placeholder: "#{current_user.profile.phone}" %></div>
+          <div class="col-xs-6">
+            <%= f.input :add_note, label: "Add special note for shopper",:input_html => {:style => "width:400px"},placeholder: "Any specific instructions about any itme/items eg. specific brand" %></div>
+      </div>
+  <%= f.button :submit, "Submit your order", class: "btn btn-success" do %>
     <i class="icon-ok icon-white"></i> Submit your order
   <% end %>
-  <%= link_to root_path, class: "btn btn-primary" do %>
+  <%= link_to root_path, class: "btn btn-default" do %>
     <i class="icon-ok icon-white"></i> Cancel
 
   <% end %>
 
 <%end%>
 <% end %>
+<script>
+$(window).ready(function(){
+  $("[data-behaviour~='datepicker']").datepicker();
+});
+</script>

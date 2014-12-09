@@ -1,15 +1,54 @@
-<h2>Log in</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email, required: false, autofocus: true %>
-    <%= f.input :password, required: false %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+<body class="main-page">
+  <div class="row">
+    <div class="span12">&nbsp;&nbsp;&nbsp;&nbsp;</div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
+  <div class="row">
+      <div class="span12">&nbsp;&nbsp;&nbsp;&nbsp;</div>
   </div>
-<% end %>
+  <div class="row">
+    <div class="span9"></div>
+    <div class="span3">
+      <span>
 
-<%= render "devise/shared/links" %>
+          <%= link_to "Returning Customer","#", "data-toggle"=>"modal", "data-target"=>"#signin-modal",class: "btn btn-default" %>
+        </span>
+
+<div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Welcome busy mom! Please sign in </h2>
+      </div>
+      <div class="modal-body">
+        <div id="signin-form">
+          <%= render partial: "users/signinform" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <%= render "devise/shared/links" %> -->
+<span>
+<%= link_to "New Customer", "#", "data-toggle"=>"modal", "data-target"=>"#signup-modal", class: "btn btn-success" %>
+</span>
+
+<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Welcome busy mom! please sign up</h2>
+      </div>
+      <div class="modal-body">
+        <div id="signup-form">
+          <%= render partial: "users/form" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</body>

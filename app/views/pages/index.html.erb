@@ -1,56 +1,62 @@
-<% if user_signed_in? %>
-<div class="navbar navbar-default">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-3" align="center">
 
-  <div class="navbar-collapse collapse navbar-responsive-collapse">
+      <h1>  Busy Moms</h1>
 
-    <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">My Account <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><%= link_to "View Profile", root_path(:profile =>"1") %></li>
-          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-        </ul>
-      </li>
-    </ul>
+      </div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+
+</div>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-3" align="center">
+
+    <hr style="height:3px;border:none;color:#333;background-color:#333;" />
   </div>
+  <div class="col-md-3"></div>
+  <div class="col-md-3"></div>
+
 </div>
 
-
-<div id ="main-heading">
-  <div class="row">
-    <div class="heading1">
-      <h1>BUSY MOMS </h1>
-    </div>
-  </div>
   <div class ="row">
-      <div class="col-md-8">
-        <div class = "heading2">
-          Making mommys happy !!
-        </div>
+    <div class="col-md-3"></div>
+      <div class="col-md-3" align="center">
+
+        <h4>  Making mommys happy !! </h4>
+
       </div>
-      <div class="col-md-4 search-recipe">
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
           <%= form_tag root_path, method: 'get', :class => "search-recipe" do %>
-          <i class="fa fa-search search-recipe"></i>
-           <%= text_field_tag :search, params[:search], class: "form-control search-recipe", placeholder: "Search a recipe" %>
+          <div class="row">
+          <div align="right" class="col-xs-4"><button :search, params[:search], class="btn btn-default" %> Search </div>
+          <div class="col-xs-8">  <%= text_field_tag :search, params[:search], class: "form-control search-recipe", placeholder: "Search a recipe" %></div>
+          </div>
           <% end %>
         </div>
-      </div>
-</div>
+    </div>
 
-  <input type="text" id="recipe_title" value="">
-  <input type="button" onClick="getRecipeJson()" value="Search">
+<p><p></p></p>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+  <!-- <input type="text" id="recipe_title" value="">
+  <input type="button" onClick="getRecipeJson()" value="Search"> -->
 
 <div class="btn-group btn-group-justified btn-group-lg">
 <%= link_to "Add New Recipe", "#", class: "btn btn-warning", data: {toggle: "modal", target: "#newRecipeModal"} %>
 
 <%= link_to "Place a new order", new_order_path ,class: "btn btn-success" %>
   <%= link_to "Check Status", root_path(:status => "1"), class: "btn btn-danger" %>
-  <%= link_to "All Recipes", root_path, class: "btn btn-info" %>
+  <%= link_to "All Recipes", root_path(:recipes => "1"), class: "btn btn-info" %>
 
 </div>
 
-<div class="modal fade" id="newRecipeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog">
+
+<div class="modal fade bs-example-modal-lg" id="newRecipeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
   <div class="modal-content">
     <div id="recipe-form">
       <%= render partial: 'pages/recipeform' %>
@@ -68,12 +74,38 @@
     <div id="user_profile">
     <%= render partial: "users/edit" %>
     </div>
-<% else %>
+<% elsif params[:recipes] %>
   <div id="recipes">
     <%= render partial: "pages/recipes" %>
   </div>
 
 <% end %>
+
+<div class="banner">
+  <ul>
+    <li><img src ="http://creativebeautyhealth.com/wp-content/uploads/multi-tasking-mom.jpg"></li>
+    <li><img src ="http://www.thestar.com/content/dam/thestar/life/parent/2011/12/01/moms_multitask_10_hours_more_per_week_than_dads_study/mom_juggles_work_andbaby.jpeg"></li>
+    <li><img src ="http://livingthebalancedlife.com/wp-content/uploads/2011/02/multitasking-mom.jpg"></li>
+    <li><img src ="http://www.ourkids.net/blog/wp-content/uploads/2011/12/busy-mom-600x.jpg"></li>
+
+  </ul>
+</div>
+
+<script>
+$(window).ready(function(){
+
+  $('.banner').unslider({
+    speed: 1000,               //  The speed to animate each slide (in milliseconds)
+    delay: 3000,              //  The delay between slide animations (in milliseconds)
+    complete: function() {},  //  A function that gets called after every slide animation
+    keys: true,               //  Enable keyboard (left, right) arrow shortcuts
+    dots: true,               //  Display dot navigation
+    fluid: false              //  Support responsive design. May break non-responsive designs
+  });
+});
+</script>
+
+
 
 <script>
 function getRecipeJson()
@@ -139,4 +171,3 @@ function getRecipeJson()
 {{ }); }}
 
 </script>
-<% end %>

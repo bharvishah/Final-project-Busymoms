@@ -60,7 +60,7 @@ class PagesController < ApplicationController
     elsif params[:remove_ingredient]
     else
       @recipe.save
-      redirect_to root_path
+      @recipe = Recipe.new
     end
   end
 

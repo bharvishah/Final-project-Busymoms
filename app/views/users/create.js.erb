@@ -1,0 +1,6 @@
+<% if @user.errors.any? %>
+$("#signup-form").html("<%= j render partial: 'users/form' %>");
+<% else %>
+$("#signup-form").modal("hide");
+window.location = "/"
+<% end %>

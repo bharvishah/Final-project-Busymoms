@@ -1,24 +1,52 @@
-
-<h2>edit profile</h2>
+<!-- <form class="form-horizontal"> -->
+<h2>Edit profile</h2>
 <%= simple_form_for @user, :url => update_user_path(@user) do |f| %>
 
 <div class="form-inputs">
-  <%= f.simple_fields_for :profile do |profile_form| %>
-  <%= profile_form.input :first_name, required:true %>
-  <%= profile_form.input :last_name, required:true %>
-  <%= profile_form.input :address_line1, required:true %>
-  <%= profile_form.input :address_line2 %>
-  <%= profile_form.input :city, required:true %>
-  <%= profile_form.input :state, required:true %>
-  <%= profile_form.input :phone, required:true %>
-  <%= profile_form.input :photo %>
+
+<%= f.simple_fields_for :profile do |profile_form| %>
+  <div class="row">
+    <div class = "col-xs-6">
+      <%= profile_form.input :first_name, required:true %></div>
+    <div class="col-xs-6">
+        <%= profile_form.input :last_name, required:true %></div>
+  </div>
+  <div class ="row">
+      <div class = "col-xs-6">
+        <%= profile_form.input :address_line1, required:true %></div>
+      <div class = "col-xs-6">
+        <%= profile_form.input :address_line2 %></div>
+  </div>
+  <div class="row">
+        <div class = "col-xs-6">
+          <%= profile_form.input :city, required:true %></div>
+        <div class = "col-xs-6">
+          <%= profile_form.input :state, required:true, :collection => ["AL","AK","AR","AZ","CA","CO","CT","DE","DC","FL","GA","HI","IL","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"],:include_blank => false %></div>
+
+
+    </div>
+    <div class="row">
+          <div class = "col-xs-4">
+              <%= profile_form.input :zip, required:true %></div>
+              <div class="col-xs-4">
+              <%= profile_form.input :country, :collection =>["United States Of America"],:include_blank => false %></div>
+
+
+          <div class = "col-xs-4">
+            <%= profile_form.input :phone, required:true %></div>
+        </div>
+      <!-- <div class="row">
+        <div class = "col-xs-6">
+          <%= profile_form.input :phone, required:true %></div>
+        <div class = "col-xs-6">
+            <%= profile_form.input :photo %></div>
+      </div> -->
   <% end %>
-  <%= f.input :email, required: true, autofocus: true %>
-  <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable) %>
-  <%= f.input :password_confirmation, required: true %>
+  <%= f.input :email, required: true, autofocus: true, :input_html => {:style => "width:300px;"} %>
 </div>
 
 <div class="form-actions">
   <%= f.button :submit, "Update profile" %>
 </div>
 <% end %>
+<!-- </form> -->

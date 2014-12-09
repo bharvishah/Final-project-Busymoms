@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   root 'pages#index'
-  get 'users/new', as: :sign_up
-  post 'users' => 'users#create', as: :users
+  #get 'users/new', as: :sign_up
+  post '/users' => 'users#create', as: :users
   get '/profile' => 'users#edit', as: :edit_user
   patch '/users/:id' => 'users#update', as: :update_user
 

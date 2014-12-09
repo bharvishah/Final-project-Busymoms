@@ -10,15 +10,21 @@
 img
 {
   height: 100%;
-  width: 10recipe0%;
+  width: 100%;
 }
 
-.search-recipe
-{
-  display: inline;
-}
+
 
 #all-recipes
 {
   padding-top: 70px;
+}
+
+.banner { position: relative; overflow: auto; }
+.banner li { list-style: none; }
+.banner ul li { float: left; }
+
+.main-page
+{
+  background-image: url("bgimage1.jpg");
 }
