@@ -7,8 +7,8 @@
       <div class="span12">&nbsp;&nbsp;&nbsp;&nbsp;</div>
   </div>
   <div class="row">
-    <div class="span9"></div>
-    <div class="span3">
+    <div class="col-sm-8"></div>
+    <div class="col-sm-4">
       <span>
 
           <%= link_to "Returning Customer","#", "data-toggle"=>"modal", "data-target"=>"#signin-modal",class: "btn btn-default" %>
@@ -32,7 +32,7 @@
 
 <!-- <%= render "devise/shared/links" %> -->
 <span>
-<%= link_to "New Customer", "#", "data-toggle"=>"modal", "data-target"=>"#signup-modal", class: "btn btn-success" %>
+<%= link_to "New Customer", "#", "data-toggle"=>"modal", "data-target"=>"#signup-modal", class: "btn btn-warning" %>
 </span>
 
 <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

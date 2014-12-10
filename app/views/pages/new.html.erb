@@ -1,3 +1,23 @@
+<script>
+$(window).ready(function(){
+  $("[data-behaviour~='datepicker']").datepicker({format: 'yyyy-mm-dd'});
+
+});
+</script>
+
+<div class="navbar navbar-inverse">
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">My Account <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><%= link_to "View Profile", root_path(:profile =>"1") %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
 
 
 <center>
@@ -10,8 +30,9 @@
 
 </p>
 </center>
-<% if user_signed_in? %>
 <%= simple_form_for @order do |f| %>
+
+<%= f.error_notification %>
 
 
 <!-- <div class = "row">
@@ -98,28 +119,30 @@
     </div>
     <div class="row">
       <div class = "col-xs-6">
-        <%= f.input :address_line1,:input_html => {:style => "width:400px"}, placeholder: "#{current_user.profile.address_line1}"%></div>
+        <%= f.input :address_line1,:input_html => {:style => "width:400px", :value => "#{current_user.profile.address_line1}"}%></div>
         <div class = "col-xs-6">
-          <%= f.input :address_line2,:input_html => {:style => "width:400px"}, placeholder: "#{current_user.profile.address_line2}"%></div>
+          <%= f.input :address_line2,:input_html => {:style => "width:400px", :value => "#{current_user.profile.address_line2}"} %></div>
 
       </div>
       <div class="row">
           <div class = "col-xs-6">
-            <%= f.input :city,:input_html => {:style => "width:300px"}, placeholder: "#{current_user.profile.city}"%></div>
+            <%= f.input :city,:input_html => {:style => "width:300px", :value=>"#{current_user.profile.city}"} %></div>
             <div class = "col-xs-6">
-            <%= f.input :state,:input_html => {:style => "width:100px"},placeholder: "#{current_user.profile.state}", :collection => ["AL","AK","AR","AZ","CA","CO","CT","DE","DC","FL","GA","HI","IL","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"],:include_blank => false, placeholder: "#{current_user.profile.state}"%></div>
+            <%= f.input :state,:input_html => {:style => "width:100px"},:selected => "#{current_user.profile.state}",
+            :collection => ["AL","AK","AR","AZ","CA","CO","CT","DE","DC","FL","GA","HI","IL","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"],
+             :include_blank => false %></div>
 
             </div>
             <div class = "row">
               <div class = "col-xs-6">
-                <%= f.input :zip,:input_html => {:style => "width:400px"}, placeholder: "#{current_user.profile.zip}"%></div>
+                <%= f.input :zip,:input_html => {:style => "width:400px", :value => "#{current_user.profile.zip}"}%></div>
               <div class = "col-xs-6">
-                <%= f.input :country,:input_html => {:style => "width:400px"}, placeholder: "#{current_user.profile.country}", :collection =>["USA"],:include_blank => false %></div>
+                <%= f.input :country,:input_html => {:style => "width:400px",:value=> "#{current_user.profile.country}"}, :collection =>["USA"],:include_blank => false %></div>
             </div>
 
       <div class="row">
         <div class = "col-xs-6">
-          <%= f.input :phone, :input_html => {:maxlength => 12, :size => 40, :style => "width: 120px" }, placeholder: "#{current_user.profile.phone}" %></div>
+          <%= f.input :phone, :input_html => {:maxlength => 12, :size => 40, :style => "width: 120px",:value => "#{current_user.profile.phone}"} %></div>
           <div class="col-xs-6">
             <%= f.input :add_note, label: "Add special note for shopper",:input_html => {:style => "width:400px"},placeholder: "Any specific instructions about any itme/items eg. specific brand" %></div>
       </div>
@@ -132,9 +155,3 @@
   <% end %>
 
 <%end%>
-<% end %>
-<script>
-$(window).ready(function(){
-  $("[data-behaviour~='datepicker']").datepicker();
-});
-</script>

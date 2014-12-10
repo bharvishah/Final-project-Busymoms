@@ -27,10 +27,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'bootstrap-sass'
-gem 'simple_form'
+gem 'simple_form', '3.1.0.rc2'
 gem 'devise'
-gem 'foursquare2'
-gem 'geocoder'
 gem 'bootstrap-datepicker-rails'
 gem 'rails_12factor'
 gem 'pg_search'
@@ -40,6 +38,8 @@ gem 'dotenv-rails'
 gem "mini_magick", "~> 4.0.0.rc"
 gem 'rails_12factor'
 gem 'remotipart', '~> 1.2'
+gem 'seed_dump'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

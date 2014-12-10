@@ -27,7 +27,7 @@ class PagesController < ApplicationController
 
   def create
     @order = Order.new(params.require(:order)
-            .permit(:store, :allow_sub, :delivery_window, :delivery_date, :add_note, :address_line1, :address_line2, :state, :zip, :phone, items_attributes: [:description, :quantity, :_destroy]))
+            .permit(:store, :allow_sub, :delivery_window, :delivery_date, :add_note, :address_line1, :address_line2, :city, :state, :zip, :country, :phone, items_attributes: [:description, :quantity, :_destroy]))
     if params[:add_item]
       @order.items.build
       render :new
@@ -36,9 +36,12 @@ class PagesController < ApplicationController
     else
       @order.status = "Order placed"
       @order.user = current_user
+
       if @order.save
         OrderMailer.order_confirmation(current_user, @order).deliver
-        redirect_to root_path, message: "Your order has been successfully placed."
+        redirect_to root_path, notice: "Your order has been successfully placed."
+      else
+        render :new
       end
     end
 
