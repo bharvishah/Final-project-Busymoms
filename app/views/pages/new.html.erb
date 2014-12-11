@@ -9,7 +9,7 @@ $(window).ready(function(){
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
       <li><%= link_to "Home", root_path(:home => "1") %></li>
-      
+
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">My Account <b class="caret"></b></a>
         <ul class="dropdown-menu">
@@ -137,7 +137,8 @@ $(window).ready(function(){
             </div>
             <div class = "row">
               <div class = "col-xs-6">
-                <%= f.input :zip,:input_html => {:style => "width:400px", :value => "#{current_user.profile.zip}"}%></div>
+                <%= f.input :zip,:input_html => {:style => "width:400px", :value => "#{current_user.profile.zip}"},
+                :collection => ["77001","77002","77003","77004","77005","77006","77007"] %></div>
               <div class = "col-xs-6">
                 <%= f.input :country,:input_html => {:style => "width:400px",:value=> "#{current_user.profile.country}"}, :collection =>["USA"],:include_blank => false %></div>
             </div>

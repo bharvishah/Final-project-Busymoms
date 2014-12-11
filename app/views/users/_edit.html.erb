@@ -27,7 +27,7 @@
     </div>
     <div class="row">
           <div class = "col-xs-4">
-              <%= profile_form.input :zip, required:true %></div>
+              <%= profile_form.input :zip,:collection => ["77001","77002","77003","77004","77005","77006","77007"] %></div>
               <div class="col-xs-4">
               <%= profile_form.input :country, :collection =>["United States Of America"],:include_blank => false %></div>
 
