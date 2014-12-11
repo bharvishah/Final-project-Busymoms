@@ -1,12 +1,13 @@
 <div id ="all-recipes">
   <% @recipes.each do |recipe| %>
   <div class="col-sm-6 col-md-3">
+    <div align="center" class="text-danger" style="font-size: 20px;"><%= recipe.name %></div>
+    <p></p>
     <div class="thumbnail">
       <%= link_to "#", data: {toggle: "modal", target: "#recipe-modal#{recipe.id}"} do %>
-      <%= image_tag recipe.photo  %>
+      <%= image_tag((recipe.photo), :class =>"recipe-img") %>
       <%  end %>
     </div>
-    <div align="center" class="text-danger" style="font-size: 20px;"><%= recipe.name %></div>
   </div>
 <div class="modal fade" id="recipe-modal<%= recipe.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

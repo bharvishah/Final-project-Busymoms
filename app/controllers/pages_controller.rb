@@ -62,8 +62,9 @@ class PagesController < ApplicationController
       @recipe.ingredients.build
     elsif params[:remove_ingredient]
     else
-      @recipe.save
-      @recipe = Recipe.new
+      if @recipe.save
+        @recipe = Recipe.new
+      end
     end
   end
 

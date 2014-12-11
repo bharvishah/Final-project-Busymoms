@@ -11,5 +11,13 @@ class Order < ActiveRecord::Base
   validates :country, presence: true
   validates :phone, presence: true
   validates :zip, presence: true
+  validates :status, presence: true
+  validates_inclusion_of :status, in: ["Order placed",
+                          "Shopper assigned", "Shopping in progress",
+                          "Out for delivery","Delivered"], :allow_nil => false
+
+def status_enum
+  [['Order placed'],['Shopper assigned'],['Shopping in progress'],['Out for delivery'],['Delivered']]
+end
 
 end

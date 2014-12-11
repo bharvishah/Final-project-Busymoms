@@ -5,8 +5,7 @@
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
   </button>
-  <!-- <a class="navbar-brand" href="#">Busy Moms!</a> -->
-  <%= link_to "Busy Moms!", root_path(:home =>"1") %>
+  <%= link_to "Busy Moms!", root_path(:home =>"1"), class: "navbar-brand" %>
 
 </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
@@ -15,7 +14,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">My Account <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><%= link_to "Add/Edit Profile", root_path(:profile =>"1") %></li>
-          <li><%= link_to "Our payment police", root_path(:payment =>"1") %></li>
+          <li><%= link_to "Our payment policy", root_path(:payment =>"1") %></li>
 
           <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
         </ul>
@@ -35,23 +34,23 @@
       </div>
       <div class="col-md-3" align="right" >
 
-      <h1>  Busy Moms</h1>
+      <h1> Busy Moms</h1>
 
       </div>
       <div class="col-md-3"></div>
       <div class="col-md-3"></div>
 
 </div>
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-3"></div>
   <div class="col-md-3" class="linestyle">
 
-    <hr style="color:#333;background-color:#333;" />
+    <hr style="color:#333;background-color:#333;" class="linestyle" />
   </div>
   <div class="col-md-3"></div>
   <div class="col-md-3"></div>
 
-</div>
+</div> -->
 
   <div class ="row">
     <div class="col-md-3">
