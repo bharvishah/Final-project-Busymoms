@@ -1,22 +1,20 @@
-<h1><%= @user.profile.first_name %></h1>
-<p>  Your order has been succesfully placed with us!</p>
-<p> Order Summary: </p>
-<p>Items: </p>
-<table>
+<p>Thank you <b><%= @user.profile.first_name %></b> for placing your order with <b> Busy Moms!</b></p>
+<p><b>Your order confirmation number:</b> <%= @order.id %>.</p>
+<p><b> Order Summary: </b></p>
+<p><b>Items Ordered:</b> </p>
 
-<p><%= @order.items.each do |item| %>
-    <tr>
-      <td>
-        <%= item.description %></td>
-        <td>
-          <%= item.quantity %></td>
+<ul>
+  <% @order.items.each do |item| %>
+    <li>
+        <%= item.description %>&nbsp;&nbsp;
 
-        </tr>
-  <% end %>
-  <p>Delivery Address : <%= @order.address_line1 %> , <%= @order.address_line2 %> , <%= @order.state %> , <%= @order.zip %> , USA</p>
+          <%= item.quantity %>
+      </li>
+    <% end %>
+  </ul>
+<p><b>Delivery Address :</b> <%= @order.address_line1 %> , <%= @order.address_line2 %> ,<%= @order.city %>, <%= @order.state %> , <%= @order.zip %> , USA</p>
 
-<p> Expected Delivery Date and Time : On <%= @order.delivery_date %> between <%= @order.delivery_window %>
-<p>
-   You will soon be updated on your order id <%= @order.id %> .
-</p>
+<p><b> Expected Delivery Date and Time :</b> On <%= @order.delivery_date %> between <%= @order.delivery_window %>
+<p>You will soon be updated on your order </p>
 <p> You can also login to your account to check the current status </p>
+<p><b> - Busy Moms Team </b></p>

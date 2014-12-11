@@ -21,10 +21,29 @@ img
 }
 
 .banner { position: relative; overflow: auto; }
+.banner ul { overflow: auto; padding-left: 0; }
 .banner li { list-style: none; }
 .banner ul li { float: left; }
 
 .main-page
 {
   background-image: url("https://s3-us-west-2.amazonaws.com/busymoms-dev/bgimage1.jpg");
+}
+
+.linestyle
+{
+//  align:right;
+  height:3px;
+  border:none;
+  margin-top:20px;
+  margin-bottom:20px;
+  padding-left:20px;
+  width:30%;
+
+}
+
+.payment-policy
+{
+  font-size:20px;
+  line-height:2.5;
 }

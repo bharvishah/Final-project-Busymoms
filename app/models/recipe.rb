@@ -6,6 +6,8 @@ class Recipe < ActiveRecord::Base
   validates :method, presence: true
   validates :cuisine, presence: true
   validates :category, presence: true
+  validates :photo, presence: true
+
 
   pg_search_scope :mysearch,
                   :against => [:name, :category, :cuisine],
