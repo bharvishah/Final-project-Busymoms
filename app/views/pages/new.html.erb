@@ -139,7 +139,7 @@ $(window).ready(function(){
             </div>
             <div class = "row">
               <div class = "col-xs-6">
-                <%= f.input :zip,:input_html => {:style => "width:400px", :value => "#{current_user.profile.zip}"},
+                <%= f.input :zip,:input_html => {:style => "width:400px", :selected => "#{current_user.profile.zip}"},
                 :collection => ["77001","77002","77003","77004","77005","77006","77007"] %></div>
               <div class = "col-xs-6">
                 <%= f.input :country,:input_html => {:style => "width:400px",:value=> "#{current_user.profile.country}"}, :collection =>["USA"],:include_blank => false %></div>
