@@ -4,12 +4,15 @@
 <p><b>Items Ordered:</b> </p>
 
 <ul>
-  <% @order.items.each do |item| %>
+  <% @order.items.each do |item|
+    unless item.description.blank? %>
+
     <li>
         <%= item.description %>&nbsp;&nbsp;
 
-          <%= item.quantity %>
+        -  <%= item.quantity %>
       </li>
+      <% end %>
     <% end %>
   </ul>
 <p><b>Delivery Address :</b> <%= @order.address_line1 %> , <%= @order.address_line2 %> ,<%= @order.city %>, <%= @order.state %> , <%= @order.zip %> , USA</p>

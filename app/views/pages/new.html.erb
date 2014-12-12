@@ -6,14 +6,23 @@ $(window).ready(function(){
 </script>
 
 <div class="navbar navbar-inverse">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <%= link_to "Busy Moms!", root_path(:home =>"1"), class: "navbar-brand" %>
+
+  </div>
   <div class="navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav navbar-right">
-      <li><%= link_to "Home", root_path(:home => "1") %></li>
-
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">My Account <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><%= link_to "View Profile", root_path(:profile =>"1") %></li>
+          <li><%= link_to "Add/Edit Profile", root_path(:profile =>"1") %></li>
+          <li><%= link_to "Our payment policy", root_path(:payment =>"1") %></li>
+
           <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
         </ul>
       </li>
@@ -24,13 +33,6 @@ $(window).ready(function(){
 
 <center>
 <h1>Complete the form and Submit</h1>
-<p align ="right">
-  <%= link_to root_path, class: "btn btn-success" do %>
-    <i class="icon-ok icon-white"></i> Home
-
-  <% end %>
-
-</p>
 </center>
 <%= simple_form_for @order do |f| %>
 

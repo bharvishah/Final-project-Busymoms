@@ -32,36 +32,24 @@
             <img src="http://www.sayhellohello.com/uploads/9/1/2/0/9120778/914699_orig.jpg" style="width:200px;height:100px">
           </div>
       </div>
-      <div class="col-md-3" align="right" >
+      <div class="col-md-6" align="center" >
 
-      <h1> Busy Moms</h1>
+      <h1 class="text-primary"> Busy Moms</h1>
 
       </div>
       <div class="col-md-3"></div>
-      <div class="col-md-3"></div>
 
 </div>
-<!-- <div class="row">
-  <div class="col-md-3"></div>
-  <div class="col-md-3" class="linestyle">
-
-    <hr style="color:#333;background-color:#333;" class="linestyle" />
-  </div>
-  <div class="col-md-3"></div>
-  <div class="col-md-3"></div>
-
-</div> -->
 
   <div class ="row">
     <div class="col-md-3">
 
     </div>
-      <div class="col-md-3" align="right">
+      <div class="col-md-6" align="center">
 
-        <h4>  Making mommys happy !! </h4>
+        <h4 class="text-primary"><i>  Making mommys happy !! </i></h4>
 
       </div>
-      <div class="col-md-3"></div>
       <div class="col-md-3">
           <%= form_tag root_path, method: 'get', :class => "search-recipe" do %>
           <input type="hidden" name="recipes" value="1"/>
@@ -73,7 +61,7 @@
         </div>
     </div>
 
-<p align="center"><h5><i>Currently serving limited <%= link_to "Zip codes", root_path(:payment =>"1") %> only. </i></h5></p>
+<p align="center"><h5 class="text-primary"><i>Currently serving limited <%= link_to "Zip codes", root_path(:payment =>"1") %> only. </i></h5></p>
 <!-- <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p> -->
 
@@ -81,11 +69,12 @@
   <input type="button" onClick="getRecipeJson()" value="Search"> -->
 
 <div class="btn-group btn-group-justified btn-group-lg">
+  <%= link_to "All Recipes", root_path(:recipes => "1"), class: "btn btn-info" %>
+
 <%= link_to "Add New Recipe", "#", class: "btn btn-warning", data: {toggle: "modal", target: "#newRecipeModal"} %>
 
 <%= link_to "Place a new order", new_order_path ,class: "btn btn-success" %>
   <%= link_to "Check Status", root_path(:status => "1"), class: "btn btn-danger" %>
-  <%= link_to "All Recipes", root_path(:recipes => "1"), class: "btn btn-info" %>
 
 </div>
 
@@ -122,10 +111,10 @@
 <% elsif params[:home] %>
 <div class="banner">
   <ul>
+    <li><img src ="http://www.ourkids.net/blog/wp-content/uploads/2011/12/busy-mom-600x.jpg"></li>
+
     <li><img src ="http://creativebeautyhealth.com/wp-content/uploads/multi-tasking-mom.jpg"></li>
     <li><img src ="http://www.thestar.com/content/dam/thestar/life/parent/2011/12/01/moms_multitask_10_hours_more_per_week_than_dads_study/mom_juggles_work_andbaby.jpeg"></li>
-    <li><img src ="http://livingthebalancedlife.com/wp-content/uploads/2011/02/multitasking-mom.jpg"></li>
-    <li><img src ="http://www.ourkids.net/blog/wp-content/uploads/2011/12/busy-mom-600x.jpg"></li>
   </ul>
 </div>
 
